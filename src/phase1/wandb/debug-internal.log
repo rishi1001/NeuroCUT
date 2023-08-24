@@ -1,0 +1,49 @@
+2023-04-03 10:11:22,071 INFO    StreamThr :2277407 [internal.py:wandb_internal():87] W&B internal server running at pid: 2277407, started at: 2023-04-03 10:11:22.070125
+2023-04-03 10:11:22,073 DEBUG   HandlerThread:2277407 [handler.py:handle_request():144] handle_request: status
+2023-04-03 10:11:22,077 INFO    WriterThread:2277407 [datastore.py:open_for_write():85] open: /DATATWO/users/mincut/BTP-Final/src/phase1/wandb/run-20230403_101122-wx2s7fff/run-wx2s7fff.wandb
+2023-04-03 10:11:22,078 DEBUG   SenderThread:2277407 [sender.py:send():336] send: header
+2023-04-03 10:11:22,097 DEBUG   SenderThread:2277407 [sender.py:send():336] send: run
+2023-04-03 10:11:22,791 ERROR   SenderThread:2277407 [internal_api.py:execute():246] 403 response executing GraphQL.
+2023-04-03 10:11:22,792 ERROR   SenderThread:2277407 [internal_api.py:execute():247] {"errors":[{"message":"permission denied","path":["upsertBucket"],"extensions":{"code":"PERMISSION_ERROR"}}],"data":{"upsertBucket":null}}
+2023-04-03 10:11:22,792 ERROR   SenderThread:2277407 [sender.py:send_run():931] It appears that you do not have permission to access the requested resource. Please reach out to the project owner to grant you access. If you have the correct permissions, verify that there are no issues with your networking setup.(Error 403: Forbidden)
+Traceback (most recent call last):
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 243, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/transport/requests.py", line 39, in execute
+    request.raise_for_status()
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://api.wandb.ai/graphql
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/sdk/internal/sender.py", line 929, in send_run
+    self._init_run(run, config_value_dict)
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/sdk/internal/sender.py", line 968, in _init_run
+    server_run, inserted, server_messages = self._api.upsert_run(
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/apis/normalize.py", line 51, in wrapper
+    raise err
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 1664, in upsert_run
+    response = self.gql(
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 215, in gql
+    ret = self._retry_gql(
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 147, in __call__
+    retry_timedelta_triggered = check_retry_fn(e)
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/util.py", line 1092, in check_retry_fn
+    return fallback_retry_fn(e)
+  File "/DATATWO/users/mincut/Mincuts-using-GNNs/env/lib/python3.9/site-packages/wandb/util.py", line 1034, in no_retry_auth
+    raise CommError(
+wandb.errors.CommError: It appears that you do not have permission to access the requested resource. Please reach out to the project owner to grant you access. If you have the correct permissions, verify that there are no issues with your networking setup.(Error 403: Forbidden)
+2023-04-03 10:11:22,857 DEBUG   HandlerThread:2277407 [handler.py:handle_request():144] handle_request: shutdown
+2023-04-03 10:11:22,857 INFO    HandlerThread:2277407 [handler.py:finish():842] shutting down handler
+2023-04-03 10:11:23,097 INFO    WriterThread:2277407 [datastore.py:close():298] close: /DATATWO/users/mincut/BTP-Final/src/phase1/wandb/run-20230403_101122-wx2s7fff/run-wx2s7fff.wandb
+2023-04-03 10:11:23,848 INFO    SenderThread:2277407 [sender.py:finish():1504] shutting down sender

@@ -1,0 +1,19 @@
+2023-04-03 10:11:22,057 INFO    MainThread:2277215 [wandb_setup.py:_flush():76] Configure stats pid to 2277215
+2023-04-03 10:11:22,058 INFO    MainThread:2277215 [wandb_setup.py:_flush():76] Loading settings from /home/mincut/.config/wandb/settings
+2023-04-03 10:11:22,058 INFO    MainThread:2277215 [wandb_setup.py:_flush():76] Loading settings from /DATATWO/users/mincut/BTP-Final/src/phase1/wandb/settings
+2023-04-03 10:11:22,058 INFO    MainThread:2277215 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-04-03 10:11:22,058 INFO    MainThread:2277215 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-04-03 10:11:22,058 INFO    MainThread:2277215 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'src/phase1/main.py', 'program': '/DATATWO/users/mincut/BTP-Final/src/phase1/main.py'}
+2023-04-03 10:11:22,058 INFO    MainThread:2277215 [wandb_init.py:_log_setup():506] Logging user logs to /DATATWO/users/mincut/BTP-Final/src/phase1/wandb/run-20230403_101122-wx2s7fff/logs/debug.log
+2023-04-03 10:11:22,058 INFO    MainThread:2277215 [wandb_init.py:_log_setup():507] Logging internal logs to /DATATWO/users/mincut/BTP-Final/src/phase1/wandb/run-20230403_101122-wx2s7fff/logs/debug-internal.log
+2023-04-03 10:11:22,059 INFO    MainThread:2277215 [wandb_init.py:init():546] calling init triggers
+2023-04-03 10:11:22,059 INFO    MainThread:2277215 [wandb_init.py:init():552] wandb.init called with sweep_config: {}
+config: {'embedding': 'Lipschitz_rw', 'train': 'test_data', 'anchors': 7, 'epochs': 200, 'model_name': 'graphsage', 'num_layers': 2, 'trained_on': 'gap', 'need_training': 'true', 'threshold': 0.5, 'pos_weight': 0.3, 'num_times_samples': 50, 'num_edges_samples': 50, 'norm': 'percentile', 'gpu': 2}
+2023-04-03 10:11:22,059 INFO    MainThread:2277215 [wandb_init.py:init():602] starting backend
+2023-04-03 10:11:22,059 INFO    MainThread:2277215 [wandb_init.py:init():606] setting up manager
+2023-04-03 10:11:22,065 INFO    MainThread:2277215 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-04-03 10:11:22,070 INFO    MainThread:2277215 [wandb_init.py:init():613] backend started and connected
+2023-04-03 10:11:22,075 INFO    MainThread:2277215 [wandb_init.py:init():701] updated telemetry
+2023-04-03 10:11:22,095 INFO    MainThread:2277215 [wandb_init.py:init():741] communicating run to backend with 60.0 second timeout
+2023-04-03 10:11:22,849 ERROR   MainThread:2277215 [wandb_init.py:init():764] encountered error: It appears that you do not have permission to access the requested resource. Please reach out to the project owner to grant you access. If you have the correct permissions, verify that there are no issues with your networking setup.(Error 403: Forbidden)
+2023-04-03 10:11:23,858 WARNING MsgRouterThr:2277215 [router.py:message_loop():77] message_loop has been closed
