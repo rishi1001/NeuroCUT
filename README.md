@@ -1,6 +1,3 @@
-# Mincuts-using-GNNs
-![alt text](https://github.com/rishi1001/NeuroCUT/blob/main/MinCuts_LOGO.png?raw=true)
-
 1. https://arxiv.org/abs/1906.01227
 2. https://github.com/chaitjo/graph-convnet-tsp
 
