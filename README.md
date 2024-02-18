@@ -9,13 +9,13 @@ source {environment name}/bin/activate
 ```
 2. Various parameters are listed in [makefile](/src/makefile), run commmand
 ```
-make parameter_1={value_1} parameter_2={value_2{} .. 
+make parameter_1={value_1} parameter_2={value_2} .. 
 
 Reults will be formed in the result_phase2_rl folder
 ```
 
 ## Sample Dataset
-A sample SBM graph of 50 nodes is given in the data folder. The structure of input graph is as follows:
+A sample Cora graph is given in the data folder. The structure of input graph is as follows:
 ```
 <Graph_name> //input to the model
     <test_set> 
@@ -24,8 +24,9 @@ A sample SBM graph of 50 nodes is given in the data folder. The structure of inp
         <1>...<n>
     <train_set> 
         <1>...<n>
-// Each folder in train/val/test set should have a graph.txt and graph_stats.txt
+// Each folder in train/val/test set should have a graph.txt and graph_stats.txt. The number of required cuts can be modifited in the graph_stats file.
 ```
+Also, to run on any new graph, you need to add the graph.txt and node_embedding.pt file in raw_data folder. 
 
 ## Running Baselines
 Code in Baselines folder

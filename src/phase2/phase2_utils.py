@@ -13,6 +13,7 @@ from pyclustering.cluster.center_initializer import random_center_initializer,km
 from torch_geometric.utils import to_networkx
 from torch_geometric.data import Data
 import sys
+
 def getPartitions(model,data,num_cuts,isAssigned_feature='false'):
     model.eval() 
     
@@ -164,6 +165,38 @@ def getNormalisedCutValue(data,partitions,num_cuts,device,cuttype,default=float(
         ind = torch.nonzero(gamma.squeeze() < tot_edge.item()/2).squeeze()
         phi_ind = phi[ind]
         normalised_cut = torch.min(phi_ind)
+    elif cuttype=='modularity':
+        num_nodes = A.shape[0]
+        num_edges = int(len(A._indices()[0])/ 2)  # Assuming undirected graph
+
+        partition_ids = torch.argmax(Y,dim=1)
+
+        D = torch.sparse.sum(A, dim=1).unsqueeze(1)
+        modularity = 0.0
+
+        mask_same_community = (partition_ids.view(-1, 1) == partition_ids.view(1, -1)).int().to_sparse()            
+
+        modularity = ((A - (D @ D.t()) / (2 * num_edges)) * mask_same_community).to_dense()
+
+        # from tqdm import tqdm
+
+        # for i in tqdm(range(num_nodes)):
+        #     for j in range(num_nodes):
+        #         if partition_ids[i] == partition_ids[j]:
+        #             A_ij = A[i, j]
+        #             k_i = D[i]
+        #             k_j = D[j]
+
+        #             modularity += A_ij - (k_i * k_j) / (2 * num_edges)
+
+
+        modularity = modularity.sum() / (2 * num_edges)
+
+        # modularity /= (2 * num_edges)
+
+
+        normalised_cut = -modularity.to(torch.float64)
+
     else:
         print("Wrong type")
         exit(0)

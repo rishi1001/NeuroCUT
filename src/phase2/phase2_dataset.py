@@ -12,6 +12,7 @@ import torch.nn.functional as F
 import re
 import json
 from torch_geometric.utils import from_networkx
+from phase2.phase2 import options
 
 
 class dataset(Dataset):
@@ -40,8 +41,17 @@ class dataset(Dataset):
         return num_nodes
     
     def generate_edge_index(self,index):
+        global options
+        edge_list_path = self.folder+f'/{index}/graph.txt'
+        if self.embeding=='given_lipchitz' or self.embeding=='given_spectral':
+            for g in options:
+                if self.folder.startswith(g):
+                    edge_list_path=f'../../raw_data/{g}/graph.txt'
+                    break
+            # TODO check it
+
         num_nodes=self.read_num_nodes(index)
-        tgraph=nx.read_edgelist(self.folder+f'/{index}/graph.txt', nodetype=int)
+        tgraph=nx.read_edgelist(edge_list_path, nodetype=int)
         graph=nx.Graph()
         graph.add_nodes_from(range(num_nodes))
         graph.add_edges_from(tgraph.edges())
@@ -55,16 +65,40 @@ class dataset(Dataset):
         # As = sparse_mx_to_torch_sparse_tensor(A)
     
     def generate_features(self,index):
+        global options
         if (self.embeding=="coefficents"):
             filename=self.folder+f'/{index}/features_{self.embeding}_{self.norm}.pkl'
         elif (self.embeding=='spectral'):
             filename=self.folder+f'/{index}/features_spectral_{self.anchors}_{self.norm}.pkl'
+        elif (self.embeding=='given'):
+            for g in options:
+                if g in self.folder:
+                    filename=f'../../raw_data/{g}/node_embeddings.pt'
+                    break
+        elif (self.embeding=='given_spectral'):
+            filename = self.folder+f'/{index}/features_{self.embeding}_{self.anchors}_{self.norm}.pkl'
+            for g in options:
+                if g in self.folder:
+                    f2=f'../../raw_data/{g}/node_embeddings.pt'
+                    break
+        
+        elif (self.embeding=='given_lipchitz'):
+            filename=self.folder+f'/{index}/features_{self.embeding}_{self.anchors}_{self.norm}.pkl'
+            for g in options:
+                if g in self.folder:
+                    f2=f'../../raw_data/{g}/node_embeddings.pt'
+                    break 
+
+            
         else:
             filename=self.folder+f'/{index}/features_{self.embeding}_{self.anchors}_{self.norm}.pkl'
         # print(filename)
-        if os.path.exists(filename):
+        if os.path.exists(filename):      # TODO (we are everytime generating new features)
+
             # print("Loading from pickle file")
             features = torch.load(open(filename,"rb"))
+            features = features.double()
+
             self.num_no_features=features.shape[1]  # set the total num of node features
         else:
             # tgraph=nx.read_edgelist(self.folder+f'/{index}/graph.txt')
@@ -141,6 +175,25 @@ class dataset(Dataset):
             if (self.embeding=='pca'):
                 pca=pca_embedding(graph,self.anchors)
                 features=torch.cat((features,pca),1) 
+            
+            if self.embeding=='given_lipchitz':
+                lip=lipschitz_rw_embedding(graph,self.anchors,len(graph.nodes()))
+                features=lip
+
+                features_given = torch.load(open(f2,"rb"))
+                features_given = features_given.double()
+
+                features = torch.cat((features, features_given), dim=1)
+
+            if self.embeding=='given_spectral':
+                spe=spectral_embedding(graph,self.anchors,len(graph.nodes()))
+                features=torch.from_numpy(spe)
+
+                features_given = torch.load(open(f2,"rb"))
+                features_given = features_given.double()
+
+                features = torch.cat((features, features_given), dim=1)
+
 
                 # minn=torch.min(features,dim=0)
                 # sum=torch.sum(features,dim=0)
@@ -191,6 +244,8 @@ class dataset(Dataset):
         with open(self.folder+f'/{index}/graph_stats.txt') as f:
             data = f.read()
         js = json.loads(data)
+        if 'hMetis_norm_cut' not in js:
+            return -1
         return js['hMetis_norm_cut']
     
     def read_spectral_norm_cut(self,index):

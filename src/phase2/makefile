@@ -1,6 +1,6 @@
 export train,embedding,anchors,epochs,need_training,model_name,trained_on,norm,modelPhase2,iter_update_params,isAssigned_feature,wandb,num_run,initial_type,initial_order,scoring_func,num_perturbation,node_select,node_select_heuristic,pool,update_reward,hops,num_perturbation_inference,cuttype,finetune_epochs, gamma
 train = test_data
-embedding = Lipschitz_rw ##coefficents, Lipschitz_rw, Lipschitz_sp
+embedding = given_lipchitz ##coefficents, Lipschitz_rw, Lipschitz_sp
 anchors = 7			# default 20
 epochs = 3
 need_training=True

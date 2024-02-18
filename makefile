@@ -1,5 +1,5 @@
 train = ego_facebook_lc
-embedding = Lipschitz_rw_only##coefficents,  Lipschitz_rw, Lipschitz_sp,Lipschitz_rw_only,spectral, Lipschitz_rw_node_weights
+embedding = given_lipchitz##coefficents,  Lipschitz_rw, Lipschitz_sp,Lipschitz_rw_only,spectral, Lipschitz_rw_node_weights
 anchors = 35# default 20 for 500, 3 for 30
 epochs = 60
 need_training=true		# true or false
