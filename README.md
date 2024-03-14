@@ -28,15 +28,3 @@ A sample Cora graph is given in the data folder. The structure of input graph is
 ```
 Also, to run on any new graph, you need to add the graph.txt and node_embedding.pt file in raw_data folder. 
 
-## Running Baselines
-Code in Baselines folder
-### HMETIS/Spectral Clustering
-1. Run a convert.py which takes a graph folder which contains `graph.txt` ans `graph_stats.txt`
-```
-python3 convert.py data/sample_graph/test_set/1/
-```
-2. Now,you can use visualise_cuts scripts to get values of various metrics using the cut formed
-
-### GAP
-1. In Baseline run make gap 
-
