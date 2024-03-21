@@ -12,7 +12,6 @@ import torch.nn.functional as F
 import re
 import json
 from torch_geometric.utils import from_networkx
-from phase2.phase2 import options
 
 
 class dataset(Dataset):
@@ -41,7 +40,7 @@ class dataset(Dataset):
         return num_nodes
     
     def generate_edge_index(self,index):
-        global options
+        options = ['cora_lc','citeseer_lc','harbin','roman_empire','actor']
         edge_list_path = self.folder+f'/{index}/graph.txt'
         if self.embeding=='given_lipchitz' or self.embeding=='given_spectral':
             for g in options:
@@ -65,7 +64,7 @@ class dataset(Dataset):
         # As = sparse_mx_to_torch_sparse_tensor(A)
     
     def generate_features(self,index):
-        global options
+        options = ['cora_lc','citeseer_lc','harbin','roman_empire','actor']
         if (self.embeding=="coefficents"):
             filename=self.folder+f'/{index}/features_{self.embeding}_{self.norm}.pkl'
         elif (self.embeding=='spectral'):
