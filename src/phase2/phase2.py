@@ -64,9 +64,6 @@ parser.add_argument('--cuttype',type=str,default='normalised', help='Type of cut
 parser.add_argument('--gamma',type=float,default=0.99, help='value of gamma for discounted rewards')
 
 
-options = ['cora_lc','citeseer_lc','harbin','roman_empire','actor']
-
-
 # parser.add_argument('--training', type=bool,default=False)
 args = parser.parse_args()
 # print(args)
