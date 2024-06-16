@@ -1,5 +1,4 @@
-1. https://arxiv.org/abs/1906.01227
-2. https://github.com/chaitjo/graph-convnet-tsp
+This repository is an official implementation of the Paper : [NeuroCUT: A Neural Approach for Robust Graph Partitioning](https://arxiv.org/abs/2310.11787), accepted in KDD'24.
 
 
 ## Commands to run
