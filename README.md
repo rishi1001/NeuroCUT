@@ -9,11 +9,12 @@ source {environment name}/bin/activate
 ```
 2. Various parameters are listed in [makefile](/src/makefile), run commmand
 ```
-make parameter_1={value_1} parameter_2={value_2} .. 
+make parameter_1={value_1} parameter_2={value_2} ..
+```
+
 Example command has been provided in the run.sh file.
 
-Reults will be formed in the results folder
-```
+Reults will be formed in the `results` folder, and model will be saved in `models` folder.
 
 ## Sample Dataset
 A sample Cora graph is given in the data folder. The structure of input graph is as follows:
