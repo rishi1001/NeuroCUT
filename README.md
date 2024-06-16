@@ -12,7 +12,7 @@ source {environment name}/bin/activate
 make parameter_1={value_1} parameter_2={value_2} .. 
 Example command has been provided in the run.sh file.
 
-Reults will be formed in the results¯ folder
+Reults will be formed in the results folder
 ```
 
 ## Sample Dataset
